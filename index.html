@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1530">
+<title>MAHFOUD's Contacts</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="splash"><div class="lg"><div id="logo">MAHFOUD's<br>Contacts</div><div id="logoSub">☎</div></div></div>
+
+<div id="app" hidden>
+  <header>
+    <div class="top">
+      <h1>MAHFOUD's Contacts</h1>
+      <button id="btnSos" class="ib sosi" aria-label="SOS">🚨</button>
+      <button id="btnSync" class="ib" aria-label="Sync">⟳</button>
+      <button id="btnLang" class="ib">ع</button>
+      <button id="btnSettings" class="ib" aria-label="Settings">⚙</button>
+    </div>
+    <div id="searchbar"><input id="search" type="search" autocomplete="off"></div>
+    <nav id="tabs"></nav>
+  </header>
+  <main id="view"></main>
+  <div id="index" hidden></div>
+  <button id="fab" class="fab" hidden aria-label="+">+</button>
+</div>
+
+<div id="loader" hidden><div class="spin"></div><div id="loadtxt"></div></div>
+<div id="toast" hidden></div>
+
+<div id="lock" hidden>
+  <div class="lockbox">
+    <h2 id="lockTitle"></h2>
+    <div id="lockmsg"></div>
+    <div id="dots"></div>
+    <div id="keypad"></div>
+  </div>
+</div>
+
+<script src="urgences.js"></script>
+<script src="i18n.js"></script>
+<script src="lib.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

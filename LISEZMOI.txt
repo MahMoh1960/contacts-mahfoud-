@@ -1,0 +1,18 @@
+MAHFOUD's Contacts – mode d'emploi
+
+1. Créez un dépôt GitHub (ex. « contacts ») et déposez À LA RACINE les fichiers :
+   index.html, style.css, urgences.js, i18n.js, lib.js, app.js, icon.png
+2. Créez le fichier .github/workflows/apk.yml avec le contenu du fichier apk.yml fourni.
+3. Onglet Actions > « Construire l'APK » > Run workflow. Attendez la coche verte.
+4. Ouvrez l'exécution, téléchargez l'artefact « contacts-apk », décompressez, installez app-debug.apk.
+5. Au premier lancement, autorisez l'accès aux contacts.
+
+À SAVOIR AVANT DE MODIFIER LES CONTACTS
+- Le module d'accès aux contacts ne sait pas « mettre à jour » une fiche : l'application recrée la fiche corrigée, puis supprime l'ancienne.
+- Les fiches ainsi modifiées deviennent locales (non synchronisées avec Google) ; surnom, messagerie instantanée, sonnerie et étiquettes Google ne sont pas conservés.
+- Une sauvegarde interne (10 dernières) est faite avant chaque opération ; restauration : Réglages > Sauvegardes.
+- Conseil : exportez d'abord un fichier .vcf (Réglages > Export) et conservez-le.
+
+CODE PIN : il verrouille l'application seulement (pas le contenu du téléphone, pas d'empreinte). Activation/désactivation : Réglages.
+URGENCES : numéros vérifiés le 13/10/2026 (ambassade de France, consulat d'Agadir, Challenge.ma). Les hôpitaux ne sont pas préremplis (numéros non vérifiables) : ajoutez les vôtres avec « + ».
+ANNIVERSAIRES : notifications désactivées par défaut ; activez-les dans Réglages.
