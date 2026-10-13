@@ -24,4 +24,32 @@ jobs:
           npx cap add android
           npx cap sync android
           M=android/app/src/main/AndroidManifest.xml
-          sed -i 's#</manifest>#    <uses-permission android:name="android.permission.READ_CONTAC
+          sed -i 's#</manifest>#    <uses-permission android:name="android.permission.READ_CONTACTS" />\n    <uses-permission android:name="android.permission.WRITE_CONTACTS" />\n    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />\n</manifest>#' $M
+          S=android/app/src/main/res/values/strings.xml
+          echo "<?xml version='1.0' encoding='utf-8'?>" > $S
+          echo "<resources>" >> $S
+          echo "<string name='app_name'>MAHFOUD\\'s Contacts</string>" >> $S
+          echo "<string name='title_activity_main'>MAHFOUD\\'s Contacts</string>" >> $S
+          echo "<string name='package_name'>com.mahmoh.contacts</string>" >> $S
+          echo "<string name='custom_url_scheme'>com.mahmoh.contacts</string>" >> $S
+          echo "</resources>" >> $S
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq imagemagick
+          IM=convert
+          command -v magick >/dev/null 2>&1 && IM=magick
+          R=android/app/src/main/res
+          rm -rf $R/mipmap-anydpi-v26
+          for p in "mdpi 48" "hdpi 72" "xhdpi 96" "xxhdpi 144" "xxxhdpi 192"; do
+            set -- $p
+            $IM icon.png -resize ${2}x${2} $R/mipmap-$1/ic_launcher.png
+            $IM icon.png -resize ${2}x${2} $R/mipmap-$1/ic_launcher_round.png
+          done
+      - name: Compiler l'APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: contacts-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
