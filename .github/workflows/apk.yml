@@ -1,0 +1,27 @@
+name: Construire l'APK
+on:
+  workflow_dispatch:
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Preparer le projet Capacitor
+        run: |
+          mkdir www
+          cp index.html style.css urgences.js i18n.js lib.js app.js www/
+          echo '{"appId":"com.mahmoh.contacts","appName":"MAHFOUD Contacts","webDir":"www"}' > capacitor.config.json
+          npm init -y
+          npm install @capacitor/core@7 @capacitor/cli@7 @capacitor/android@7 @capacitor-community/contacts@7 @capacitor/filesystem@7 @capacitor/share@7 @capacitor/local-notifications@7 @capacitor/app@7
+          npx cap add android
+          npx cap sync android
+          M=android/app/src/main/AndroidManifest.xml
+          sed -i 's#</manifest>#    <uses-permission android:name="android.permission.READ_CONTAC
